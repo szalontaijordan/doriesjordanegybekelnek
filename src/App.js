@@ -57,9 +57,6 @@ function App() {
 
     return (
         <>
-            <div style={{ textAlign: 'center', color: '#5F8575' }}>
-                <h1>Dóri és Jordán</h1>
-            </div>
             <div className="container">
                 {labels.map((label, key) => <span className="entry">
                     <span className="number">{Object.entries(label)[0][1]}</span>
