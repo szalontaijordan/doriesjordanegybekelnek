@@ -1,3 +1,7 @@
+:root {
+  --yellow: #eec22c;
+}
+
 .entry {
   display: block;
   margin-right: 24px;
@@ -11,7 +15,7 @@
 
 .text {
   font-size: 36px;
-  color: #1167b1;
+  color: rgb(17, 103, 177);
 }
 
 .container {
@@ -29,4 +33,177 @@
   .container {
     text-align: center;
   }
+}
+
+.agenda {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(24px, 1fr));
+  grid-template-rows: repeat(6, minmax(24px, 1fr));
+  gap: 1rem;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.grid > div:nth-child(7) {
+  color: #8b0000;
+}
+
+.grid > div:nth-child(1),
+.grid > div:nth-child(2),
+.grid > div:nth-child(3),
+.grid > div:nth-child(4),
+.grid > div:nth-child(5),
+.grid > div:nth-child(6),
+.grid > div:nth-child(7) {
+  font-weight: 500;
+}
+
+.grid > div:nth-child(40),
+.grid > div:nth-child(41),
+.grid > div:nth-child(42),
+.grid > div:nth-child(8) {
+  opacity: 0.4;
+}
+
+.grid > div {
+  color: #232323;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: calc((100% - 23px) / 2) 0;
+}
+
+.grid > div:nth-child(34) {
+  background: radial-gradient(circle, rgba(17, 103, 177) 0%, rgba(17,103,130,1) 100%);
+  color: white;
+  font-weight: 500;
+  border-radius: 50%;
+  box-shadow: 0 0 16px 0 rgba(17, 103, 177, 0.5);
+  opacity: 1;
+}
+
+.calendar > div:first-child {
+  font-size: 24px;  
+  font-weight: 400;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+}
+.calendar > div:first-child > span {
+  display: inline-block;
+  margin-right: 8px;
+  font-weight: 500;
+}
+.calendar {
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+}
+.details {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.details .content {
+  padding: 16px;
+  padding-bottom: 0;
+  background: radial-gradient(circle at 100%, rgba(17,103,177,0.2) 0%, rgba(17,103,130,0.2) 100%);
+  z-index: 1;
+  position: relative;
+  margin: 0;
+  margin-top: 8px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.content .handle {
+  width: 100px;
+  position: absolute;
+  height: 4px;
+  left: 0;
+  background: rgba(255, 255, 255, 0.5);
+  right: 0;
+  top: 8px;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+.content .title {
+  font-size: 18px;
+  color: #005604;
+  z-index: 10;
+  padding: 32px 8px;
+}
+.title strong {
+  background: white;
+  padding: 4px 16px;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.content .title {
+  position: sticky;
+  top: 0;
+}
+.timeline {
+  position: sticky;
+  padding: 16px;
+  padding-bottom: 0;
+  top: 88px;
+}
+.timeline-item {
+  display: flex;
+  min-height: 32px;
+  position: relative;
+  color: #005604;
+  font-size: 18px;
+}
+.dot {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #005604;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+}
+.dot::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 68px;
+  width: 3px;
+  height: 100%;
+  background: #005604;
+}
+.dot::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 62px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid white;
+  top: 3px;
+  z-index: 3;
+}
+
+.item-title {
+  color: #005604;
+}
+
+.dot {
+  margin: 0 16px;
 }
