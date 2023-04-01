@@ -63,10 +63,8 @@ function Agenda() {
                             {item.time}
                         </div>
                         <div className="dot" />
-                        <div className="item-title">
-                            <div className="card">
-                                {item.text}
-                            </div>
+                        <div className="item-title">    
+                            {item.text}
                         </div>
                     </div>))}
                 </div>
