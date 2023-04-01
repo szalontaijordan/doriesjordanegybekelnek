@@ -23,6 +23,30 @@ function App() {
 const minItemSize = 42;
 
 function Agenda() {
+
+    useEffect(() => {
+        const onScroll = () => {
+            const items = document.querySelectorAll('.timeline-item');
+            for (let i = 0; i < items.length - 1; i++) {
+                const offsetPx = 50;
+                const diff = items[i + 1].offsetTop - items[i].offsetTop;
+                const maxZero = Math.max(0, diff);
+
+                if (diff <= offsetPx) {
+                    items[i].querySelector('.item-title').style.opacity = maxZero / 100;
+                    items[i].querySelector('.time').style.opacity = maxZero / 100;
+                } else {
+                    items[i].querySelector('.item-title').style.opacity = 1;
+                    items[i].querySelector('.time').style.opacity = 1;
+                }
+            }
+        };
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, []);
+
     const days = Array.from({ length: 31 }).map((_, i) => i + 1);
     days.unshift(31);
     days.push(1, 2, 3);
