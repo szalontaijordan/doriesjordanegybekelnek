@@ -40,14 +40,14 @@ function Agenda() {
 
     return <div className="agenda">
         <div className="calendar">
-            <div><span>Augusztus</span>2023</div>
+            <div className="calendar-title"><div className="month">Augusztus</div><div className="year">2023</div></div>
             <div className="grid">
                 {days.map(day => <div>{day}</div>)}
             </div>
         </div>
         <div className='details'>
             <div className="space calendar" style={{ position: 'static', visibility: 'hidden' }}>
-                <div><span>Augusztus</span>2023</div>
+                <div className="calendar-title"><div className="month">Augusztus</div><div className="year">2023</div></div>
                 <div className="grid">
                     {days.map(day => <div>{day}</div>)}
                 </div>
