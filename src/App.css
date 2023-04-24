@@ -105,7 +105,7 @@
   font-weight: 100;
 }
 .calendar {
-  padding-top: 32px;
+  padding-top: 48px;
   padding-left: 32px;
   padding-right: 32px;
   position: fixed;
@@ -216,4 +216,25 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+}
+
+.lang-selector {
+  position: fixed;
+  top: 0;
+  right: 8px;
+  z-index: 1;
+}
+.lang-selector.hidden {
+  visibility: hidden;
+}
+
+.lang-selector button {
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+}
+.lang-selector button:not(.active) {
+  opacity: 0.5;
 }

@@ -1,9 +1,10 @@
 import { addDays, addHours, addMinutes, addMonths, addSeconds, addWeeks, addYears, differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, differenceInSeconds, differenceInWeeks, differenceInYears } from 'date-fns';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './App.css';
+import { I18NContext, useI18N } from './i18n';
 
 const router = createBrowserRouter([
     {
@@ -11,18 +12,37 @@ const router = createBrowserRouter([
       element: <CountDown />,
     },
     {
+        path: "/countdown",
+        element: <CountDown />,
+      },
+    {
         path: '/program',
         element: <Agenda />,
     }
 ]);
 
 function App() {
-    return <RouterProvider router={router} />;
+    const [lang, setLang] = useState(navigator.language === 'hu-HU' ? 'hu' : 'en');
+
+    return <I18NContext.Provider value={{ lang, setLang }}>
+        <LangSelector />
+        <RouterProvider router={router} />
+    </I18NContext.Provider>;
+}
+
+function LangSelector() {
+    const { lang, setLang } = useContext(I18NContext);
+
+    return <div className="lang-selector">
+        <button className={lang === 'en' ? 'active' : ''} onClick={() => setLang('en')}>🇬🇧</button>
+        <button className={lang === 'hu' ? 'active' : ''} onClick={() => setLang('hu')}>🇭🇺</button>
+    </div>;
 }
 
 const minItemSize = 42;
 
 function Agenda() {
+    const { dowShort, events, aug, fullDate } = useI18N();
 
     useEffect(() => {
         const onScroll = () => {
@@ -50,36 +70,37 @@ function Agenda() {
     const days = Array.from({ length: 31 }).map((_, i) => i + 1);
     days.unshift(31);
     days.push(1, 2, 3);
-    days.unshift(...['H', 'K', 'SZ', 'CS', 'P', 'SZ', 'V']);
+    days.unshift(...dowShort);
 
     const items = [
-        { time: '15:30', text: 'Vendégvárás', duration: 2 },
-        { time: '16:30', text: 'Polgári ceremónia', duration: 3 },
-        { time: '18:00', text: 'Templom', duration: 3 },
-        { time: '19:30', text: 'Vacsora és Hajnalig tartó mulatság', duration: 5 },
-        { time: '00:00', text: 'Menyasszonytánc', duration: 8 },
+        { time: '15:30', text: '', duration: 2 },
+        { time: '16:30', text: '', duration: 3 },
+        { time: '18:00', text: '', duration: 3 },
+        { time: '19:30', text: '', duration: 5 },
+        { time: '00:00', text: '', duration: 8 },
         { time: '04:00', text: '', duration: 10 },
-        { time: '09:00', text: 'Hazautazás', duration: 2 },
+        { time: '09:00', text: '', duration: 2 },
     ];
+    items.forEach((item, index) => item.text = events[index]);
 
     return <div className="agenda">
         <div className="calendar">
-            <div className="calendar-title"><div className="month">Augusztus</div><div className="year">2023</div></div>
+            <div className="calendar-title"><div className="month">{aug}</div><div className="year">2023</div></div>
             <div className="grid">
-                {days.map(day => <div>{day}</div>)}
+                {days.map((day, key) => <div key={key}>{day}</div>)}
             </div>
         </div>
         <div className='details'>
             <div className="space calendar" style={{ position: 'static', visibility: 'hidden' }}>
-                <div className="calendar-title"><div className="month">Augusztus</div><div className="year">2023</div></div>
+                <div className="calendar-title"><div className="month">{aug}</div><div className="year">2023</div></div>
                 <div className="grid">
-                    {days.map(day => <div>{day}</div>)}
+                    {days.map((day, key) => <div key={key}>{day}</div>)}
                 </div>
             </div>
             <div className="content">
                 <div className="handle" />
                 <div className="title">
-                    <strong>2023. augusztus 26.</strong>
+                    <strong>{fullDate}</strong>
                 </div>
                 <div className="timeline">
                     {items.map((item, key) => (<div className="timeline-item" key={key} style={{ height: `${(item.duration + 1) * minItemSize}px` }}>
@@ -98,6 +119,7 @@ function Agenda() {
 }
 
 function CountDown() {
+    const { countDownLabels, plural } = useI18N();
     const [now, setNow] = useState(new Date());
 
     useEffect(() => {
@@ -141,19 +163,19 @@ function CountDown() {
 
     const { years, months, weeks, days, hours, minutes, seconds } = getData();
     const labels = [
-        { 'év': years },
-        { 'hónap': months },
-        { 'hét': weeks },
-        { 'nap': days },
-        { 'óra': hours },
-        { 'perc': minutes },
-        { 'másodperc': seconds }
+        { [plural(countDownLabels.years, years)]: years },
+        { [plural(countDownLabels.months, months)]: months },
+        { [plural(countDownLabels.weeks, weeks)]: weeks },
+        { [plural(countDownLabels.days, days)]: days },
+        { [plural(countDownLabels.hours, hours)]: hours },
+        { [plural(countDownLabels.minutes, minutes)]: minutes },
+        { [plural(countDownLabels.seconds, seconds)]: seconds }
     ];
 
     return (
         <>
             <div className="container">
-                {labels.map((label, key) => <span className="entry">
+                {labels.map((label, key) => <span className="entry" key={key}>
                     <span className="number">{Object.entries(label)[0][1]}</span>
                     <span className="text">{Object.entries(label)[0][0]}</span>
                 </span>)}
