@@ -238,3 +238,75 @@
 .lang-selector button:not(.active) {
   opacity: 0.5;
 }
+
+.invitation {
+  max-width: 760px;
+  padding: 16px;
+  padding-top: 64px;
+  margin: 0 auto;
+}
+
+.invitation div {
+  text-align: center;
+  letter-spacing: 1px;
+  font-style: italic;
+  color: #866519;
+  font-weight: 400;
+}
+
+.invitation .img img {
+  width: 100%;
+  max-width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  position: absolute;
+}
+.invitation .img {
+  min-height: 420px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.invitation .text-container {
+  position: relative;
+}
+.invitation .top,
+.invitation .bottom,
+.invitation .img {
+  margin-bottom: 16px;
+}
+
+.mt {
+  margin-top: 16px;
+}
+
+.top2 {
+  margin-top: 32px;
+}
+
+.invitation .img2 img {
+  opacity: 0.3;
+}
+
+@media screen and (min-width: 420px) {
+  .invitation .img2 img {
+    opacity: 1;
+  }
+}
+
+.invitation .brackets {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.img .text-container {
+  font-size: 18px;
+}
+
+.img2 .text-container {
+  font-size: 12px;
+}

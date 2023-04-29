@@ -2,6 +2,7 @@ import { addDays, addHours, addMinutes, addMonths, addSeconds, addWeeks, addYear
 import { useState, useEffect, useContext } from 'react';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Invitation from './Invitation';
 
 import './App.css';
 import { I18NContext, useI18N } from './i18n';
@@ -14,15 +15,27 @@ const router = createBrowserRouter([
     {
         path: "/countdown",
         element: <CountDown />,
-      },
+    },
     {
         path: '/program',
         element: <Agenda />,
+    },
+    {
+        path: '/agenda',
+        element: <Agenda />,
+    },
+    {
+        path: '/meghivo',
+        element: <Invitation />,
+    },
+    {
+        path: '/invitation',
+        element: <Invitation />,
     }
 ]);
 
 function App() {
-    const [lang, setLang] = useState(navigator.language === 'hu-HU' ? 'hu' : 'en');
+    const [lang, setLang] = useState('hu');
 
     return <I18NContext.Provider value={{ lang, setLang }}>
         <LangSelector />
@@ -43,6 +56,10 @@ const minItemSize = 42;
 
 function Agenda() {
     const { dowShort, events, aug, fullDate } = useI18N();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         const onScroll = () => {
