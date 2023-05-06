@@ -38,6 +38,8 @@
 .agenda {
   max-width: 760px;
   margin: 0 auto;
+  z-index: 0;
+  position: relative;
 }
 
 .grid {
@@ -159,7 +161,7 @@
 
 .content .title {
   position: sticky;
-  top: 0;
+  top: 24px;
 }
 .timeline {
   position: sticky;
@@ -220,8 +222,9 @@
 
 .lang-selector {
   position: fixed;
-  top: 0;
+  top: 4px;
   right: 8px;
+  transform: scale(1.2);
   z-index: 1;
 }
 .lang-selector.hidden {
@@ -291,12 +294,6 @@
   opacity: 0.3;
 }
 
-@media screen and (min-width: 420px) {
-  .invitation .img2 img {
-    opacity: 1;
-  }
-}
-
 .invitation .brackets {
   margin-top: 8px;
   margin-bottom: 8px;
@@ -309,4 +306,122 @@
 
 .img2 .text-container {
   font-size: 12px;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.menu-overlay {
+  padding: 16px;
+  background: radial-gradient(circle at 100%, rgba(238, 194, 44, 0.3) 0%, rgba(238, 194, 44, 0.2) 100%);
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  border-radius: 8px;
+  position: fixed;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  backdrop-filter: blur(8px);
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+.menu-overlay.closed {
+  transform: translateY(-100%);
+}
+.menu-overlay.open {
+  transform: translateY(0);
+}
+
+.menu-icon {
+  z-index: 2;
+}
+
+.menu-overlay ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 92px;
+}
+
+.menu-overlay li {
+  display: block;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  padding: 4px 16px;
+  margin: 24px auto;
+  border-radius: 32px;
+  background-color: white;
+  max-width: 320px;
+  border-top-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.menu-overlay a,
+.menu-overlay a:visited
+.menu-overlay a {
+  display: block;
+  color: #384688;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.menu-overlay li.active {
+  pointer-events: none;
+  border-top-width: 0;
+  background-color: rgba(56, 70, 136, 0.85);
+}
+li.active a {
+  color: white;
+}
+
+.menu-overlay button.close {
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  overflow: hidden;
+  background: transparent;
+}
+
+@media screen and (min-width: 420px) {
+  .invitation .img2 img {
+    opacity: 1;
+  }
+
+  .lang-selector {
+    transform: scale(1.0);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .menu-overlay {
+    top: 24px;
+    left: 24px;
+    bottom: unset;
+    right: 24px;
+  }
+  .menu-overlay.closed {
+    top: 0;
+  }
+  .menu-overlay.open {
+    top: 56px;
+    left: 64px;
+    bottom: unset;
+    right: 64px;
+  }  
+}
+
+.cntdwn {
+  max-width: 500px;
+  margin: 0 auto;
 }

@@ -1,13 +1,15 @@
 import { addDays, addHours, addMinutes, addMonths, addSeconds, addWeeks, addYears, differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, differenceInSeconds, differenceInWeeks, differenceInYears } from 'date-fns';
 import { useState, useEffect, useContext } from 'react';
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import Invitation from './Invitation';
 
 import './App.css';
+import './Menu.scss';
+
 import { I18NContext, useI18N } from './i18n';
 
-const router = createBrowserRouter([
+const router = [
     {
       path: "/",
       element: <CountDown />,
@@ -32,15 +34,55 @@ const router = createBrowserRouter([
         path: '/invitation',
         element: <Invitation />,
     }
-]);
+];
 
 function App() {
     const [lang, setLang] = useState('hu');
 
     return <I18NContext.Provider value={{ lang, setLang }}>
+        <Menu />
         <LangSelector />
-        <RouterProvider router={router} />
+        <Routes>
+            {router.map(route => <Route key={route.path} path={route.path} element={route.element} />)}
+        </Routes>
     </I18NContext.Provider>;
+}
+
+function Menu() {
+    //
+    // https://codepen.io/fromwireframes/pen/arMrYp
+    //
+    const [isOpen, setIsOpen] = useState(false);
+    const { pathname } = useLocation();
+    const onChange = () => setIsOpen(prev => !prev);
+
+    const close = () => setIsOpen(false);
+
+    return <div className="menu">
+        <div className="menu-icon">
+            <input className="menu-icon__cheeckbox" type="checkbox" checked={isOpen} onChange={onChange} />
+            <div><span /><span /></div>
+        </div>
+        <div className={`menu-overlay ${isOpen ? 'open' : 'closed'}`}>
+            <nav>
+                <ul>
+                    <li className={pathname === '/' ? 'active' : ''}>
+                        <Link to="/" onClick={close}>Visszaszámláló</Link>
+                    </li>
+                    <li className={pathname === '/program' ? 'active' : ''}>
+                        <Link to="/program" onClick={close}>Program</Link>
+                    </li>
+                    <li className={pathname === '/meghivo' ? 'active' : ''}>
+                        <Link to="/meghivo" onClick={close}>Meghívó</Link>
+                    </li>
+                </ul>
+            </nav>
+            <div className="menu-icon close">
+                <input className="menu-icon__cheeckbox" type="checkbox" checked={isOpen} onChange={onChange} />
+                <div><span /><span /></div>
+            </div>
+        </div>
+    </div>
 }
 
 function LangSelector() {
@@ -192,10 +234,12 @@ function CountDown() {
     return (
         <>
             <div className="container">
-                {labels.map((label, key) => <span className="entry" key={key}>
-                    <span className="number">{Object.entries(label)[0][1]}</span>
-                    <span className="text">{Object.entries(label)[0][0]}</span>
-                </span>)}
+                <div className="cntdwn">
+                    {labels.map((label, key) => <span className="entry" key={key}>
+                        <span className="number">{Object.entries(label)[0][1]}</span>
+                        <span className="text">{Object.entries(label)[0][0]}</span>
+                    </span>)}
+                </div>
             </div>
         </>
     );
