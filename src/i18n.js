@@ -4,6 +4,11 @@ export const I18NContext = createContext({ lang: 'hu', setLang: () => {} });
 
 export const i18n = {
     'hu': {
+        menu: {
+            countdown: 'Visszaszámláló',
+            agenda: 'Program',
+            invitation: 'Meghívó',
+        },
         aug: 'Augusztus',
         fullDate: '2023. augusztus 26.',
         dowShort: ['H', 'K', 'SZ', 'CS', 'P', 'SZ', 'V'],
@@ -65,6 +70,11 @@ export const i18n = {
         plural: (noun, count) => noun
     },
     'en': {
+        menu: {
+            countdown: 'Countdown',
+            agenda: 'Agenda',
+            invitation: 'Invitation',
+        },
         aug: 'August',
         fullDate: '26th August 2023',
         dowShort: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],

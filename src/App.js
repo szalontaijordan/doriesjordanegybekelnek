@@ -54,6 +54,7 @@ function Menu() {
     //
     const [isOpen, setIsOpen] = useState(false);
     const { pathname } = useLocation();
+    const { menu } = useI18N();
     const onChange = () => setIsOpen(prev => !prev);
 
     const close = () => setIsOpen(false);
@@ -67,13 +68,13 @@ function Menu() {
             <nav>
                 <ul>
                     <li className={pathname === '/' ? 'active' : ''}>
-                        <Link to="/" onClick={close}>Visszaszámláló</Link>
+                        <Link to="/" onClick={close}>{menu.countdown}</Link>
                     </li>
                     <li className={pathname === '/program' ? 'active' : ''}>
-                        <Link to="/program" onClick={close}>Program</Link>
+                        <Link to="/program" onClick={close}>{menu.agenda}</Link>
                     </li>
                     <li className={pathname === '/meghivo' ? 'active' : ''}>
-                        <Link to="/meghivo" onClick={close}>Meghívó</Link>
+                        <Link to="/meghivo" onClick={close}>{menu.invitation}</Link>
                     </li>
                 </ul>
             </nav>
