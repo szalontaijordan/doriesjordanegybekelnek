@@ -133,10 +133,11 @@ function Agenda() {
     days.unshift(...dowShort);
 
     const items = [
+        { time: '15:00', text: '', duration: 0.5 },
         { time: '15:30', text: '', duration: 2 },
         { time: '16:30', text: '', duration: 3 },
-        { time: '18:00', text: '', duration: 3 },
-        { time: '19:30', text: '', duration: 5 },
+        { time: '18:00', text: '', duration: 4 },
+        { time: '20:00', text: '', duration: 8 },
         { time: '00:00', text: '', duration: 8 },
         { time: '04:00', text: '', duration: 10 },
         { time: '09:00', text: '', duration: 2 },

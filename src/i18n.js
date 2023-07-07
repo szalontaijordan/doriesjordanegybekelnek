@@ -13,12 +13,13 @@ export const i18n = {
         fullDate: '2023. augusztus 26.',
         dowShort: ['H', 'K', 'SZ', 'CS', 'P', 'SZ', 'V'],
         events: [
-            'Vendégvárás',
+            'Vendégek érkezése, fogadás',
+            'Kikérés',
             'Polgári ceremónia',
             'Templom',
             'Vacsora és Hajnalig tartó mulatság',
             'Menyasszonytánc',
-            '',
+            'Záróra',
             'Hazautazás',
         ],
         countDownLabels: {
@@ -79,12 +80,13 @@ export const i18n = {
         fullDate: '26th August 2023',
         dowShort: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         events: [
-            'Reception',
+            'Arrival and reception',
+            'The groom meets the bride',
             'Wedding ceremony (civil)',
             'Wedding ceremony (church)',
             'Diner & party until dawn',
             'Dance with the bride',
-            '',
+            'Closing time',
             'Travelling home'
         ],
         countDownLabels: {
