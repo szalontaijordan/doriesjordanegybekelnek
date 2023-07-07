@@ -12,8 +12,8 @@ import { Camera, Guests } from './Guests';
 
 const router = [
     {
-      path: "/",
-      element: <CountDown />,
+        path: "/",
+        element: <CountDown />,
     },
     {
         path: "/countdown",
@@ -81,7 +81,7 @@ function Menu() {
             <nav>
                 <ul>
                     <li className={pathname === '/vendegkonyv' ? 'active' : ''}>
-                        <Link to="/vendegkonyv" onClick={close}>Vendégkönyv</Link>
+                        <Link to="/vendegkonyv" onClick={close}>{menu.guests}</Link>
                     </li>
                     <li className={pathname === '/' ? 'active' : ''}>
                         <Link to="/" onClick={close}>{menu.countdown}</Link>
@@ -149,14 +149,15 @@ function Agenda() {
     days.unshift(...dowShort);
 
     const items = [
+        { time: '14:00', text: '', duration: 1 },
         { time: '15:00', text: '', duration: 0.5 },
         { time: '15:30', text: '', duration: 2 },
         { time: '16:30', text: '', duration: 3 },
         { time: '18:00', text: '', duration: 4 },
         { time: '20:00', text: '', duration: 8 },
         { time: '00:00', text: '', duration: 8 },
-        { time: '04:00', text: '', duration: 10 },
-        { time: '09:00', text: '', duration: 2 },
+        { time: '04:00', text: '', duration: 12 },
+        { time: '10:00', text: '', duration: 2 },
     ];
     items.forEach((item, index) => item.text = events[index]);
 
@@ -185,7 +186,7 @@ function Agenda() {
                             {item.time}
                         </div>
                         <div className="dot" />
-                        <div className="item-title">    
+                        <div className="item-title">
                             {item.text}
                         </div>
                     </div>))}
@@ -196,7 +197,7 @@ function Agenda() {
 }
 
 function CountDown() {
-    const { countDownLabels, plural } = useI18N();
+    const { today, countDownLabels, menu, plural } = useI18N();
     const [now, setNow] = useState(new Date());
 
     useEffect(() => {
@@ -204,7 +205,7 @@ function CountDown() {
     }, []);
 
     const getData = () => {
-        let wedding = new Date('2023-08-26');
+        let wedding = new Date('2023-08-26 07:00');
 
         const years = differenceInYears(wedding, now);
         wedding = addYears(wedding, -years);
@@ -249,14 +250,38 @@ function CountDown() {
         { [plural(countDownLabels.seconds, seconds)]: seconds }
     ];
 
+    const weddingDayStart = new Date('2023-08-26 7:00').getTime();
+    const weddingDayEnd = new Date('2023-08-27 10:00').getTime();
+
+    const isToday = now.getTime() > weddingDayStart && now.getTime() < weddingDayEnd;
+
     return (
         <>
             <div className="container">
                 <div className="cntdwn">
-                    {labels.map((label, key) => <span className="entry" key={key}>
-                        <span className="number">{Object.entries(label)[0][1]}</span>
-                        <span className="text">{Object.entries(label)[0][0]}</span>
-                    </span>)}
+                    {
+                        isToday
+                            ? <>
+                                <span className="today">{today}</span>
+                                <nav>
+                                    <ul>
+                                        <li>
+                                            <Link to="/program">{menu.agenda}</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/vendegkonyv">{menu.guests}</Link>
+                                        </li>                            
+                                    </ul>
+                                </nav>
+                            </>
+                            : <>
+
+                                {labels.map((label, key) => <span className="entry" key={key}>
+                                    <span className="number">{Object.entries(label)[0][1]}</span>
+                                    <span className="text">{Object.entries(label)[0][0]}</span>
+                                </span>)}
+                            </>
+                    }
                 </div>
             </div>
         </>

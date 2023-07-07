@@ -34,11 +34,13 @@
         font-weight: 700;
         font-style: italic;
         font-size: 16px;
+        white-space: pre-wrap;
+        text-align: left;
     }
 
     &.first p:nth-of-type(1) {
         top: 16px;
-        left: 32px;
+        left: 24px;
     }
     &.first p:nth-of-type(2) {
         bottom: 128px;
@@ -79,6 +81,7 @@
     justify-content: center;
 }
 
+.dont-forget,
 .a70,
 .album,
 .e-mail,
@@ -129,6 +132,26 @@
         box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
         top: 2px;
     }
+}
+
+.album,
+.e-mail,
+.instagram-profile {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.dont-forget {
+    position: sticky;
+    top: 484px;
+    opacity: 0.4;
+    margin: 0 auto;
+    pointer-events: none;
+
+    span {
+        font-size: 14px;
+    }
+
 }
 
 .e-mail img {

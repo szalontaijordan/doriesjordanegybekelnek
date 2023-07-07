@@ -6,12 +6,14 @@ import gpa from './img/gpa.png';
 import sc from './img/samsungcamera.png';
 
 import './Guest.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useI18N } from './i18n';
 
 export function Guests() {
     const ref = useRef(null);
     const tiemoutRef = useRef();
+    const { guests } = useI18N();
 
     useEffect(() => {
         const onScroll = () => {
@@ -43,12 +45,13 @@ export function Guests() {
     return <>
         <div ref={ref} className="container guests">
             <ImageCard src={dj2} cn="first">
-                <p>Készíts egy fotót a<br />vendégkönyhöz</p>
+                <p>{guests.card1}</p>
                 <A70 />
             </ImageCard>
             <ImageCard src={dj1} cn="second">
-                <p>És küldd el<br />nekünk!</p>
+                <p>{guests.card2}</p>
             </ImageCard>
+            <DontForget />
             <div className="how">
                 <p style={{ textAlign: 'center' }}></p>
                 <div className="insta">
@@ -64,30 +67,30 @@ export function Guests() {
 }
 
 export function Camera() {
+    const { guests } = useI18N();
+    const { help } = guests;
     return <>
         <div className="container guests">
             <div className="help-glass" >
                 <div className="help-text">
-                    Vendégköny <strong>saját telefonnal:</strong>
-                    <p>Készíts egy képet,</p>
-                    <p>majd küldd el nekünk az elérhetőségeinkre</p>
+                    {help.gb} <strong>{help.withYours}</strong>
+                    <p>{help.p11}<br />{help.p12}</p>
                 </div>
                 <div className="help-glass" style={{ padding: '8px', width: '100px', marginLeft: 'auto' }} >
                     <div className="help-text" style={{ textAlign: 'center' }}>
-                        <Link to="/vendegkonyv">vissza</Link>
+                        <Link to="/vendegkonyv">{help.back}</Link>
                     </div>
                 </div>
             </div>
             <div className="help-glass" >
                 <div className="help-text">
-                    Vendégköny <strong>a mi telefonunkkal:</strong>
-                    <p>Nyisd meg a <em>kamera alkalamzást</em></p>
-                    <p>és készíts egy képet!</p>
-                    <p>Az esküvő után rendszerezzük a mi telefonunkkal készült képeket</p>
+                    {help.gb} <strong>{help.withOurs}</strong>
+                    <p>{help.p21}<em>{help.p2em}</em><br />{help.p22}</p>
+                    <p>{help.p23}</p>
                 </div>
                 <div className="help-glass" style={{ padding: '8px', width: '100px', marginLeft: 'auto' }} >
                     <div className="help-text" style={{ textAlign: 'center' }}>
-                        <Link to="/vendegkonyv">vissza</Link>
+                        <Link to="/vendegkonyv">{help.back}</Link>
                     </div>
                 </div>
             </div>
@@ -98,7 +101,7 @@ export function Camera() {
 
 function ImageCard({ src, children, cn }) {
     return <div className={`image-card ${cn}`}>
-        <img src={src} alt="Image" />
+        <img src={src} alt="Bride and Groom" />
         <div className="children">{children}</div>
     </div>;
 }
@@ -131,6 +134,13 @@ function Mail({ name, mail }) {
 
 }
 
+function DontForget() {
+    const { guests } = useI18N();
+    return <div className="dont-forget">
+        <span>{guests.dontForget}</span>
+    </div>;
+}
+
 function Photos() {
     const album = 'https://drive.google.com/drive/folders/1V2oWqES0Pu2ukwSc1-fMHYm6dynLu23-?usp=sharing';
     return <div className="album">
@@ -149,7 +159,7 @@ function A70() {
     return <div className="a70">
         <button>
             <Link to="/camera">
-                <img src={sc} alt="Photos" />
+                <img src={sc} alt="Camera" />
             </Link>
         </button>
 

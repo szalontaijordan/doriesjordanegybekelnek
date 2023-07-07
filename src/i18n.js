@@ -4,15 +4,18 @@ export const I18NContext = createContext({ lang: 'hu', setLang: () => {} });
 
 export const i18n = {
     'hu': {
+        today: 'Ma!',
         menu: {
             countdown: 'Visszaszámláló',
             agenda: 'Program',
             invitation: 'Meghívó',
+            guests: 'Vendégkönyv'
         },
         aug: 'Augusztus',
         fullDate: '2023. augusztus 26.',
         dowShort: ['H', 'K', 'SZ', 'CS', 'P', 'SZ', 'V'],
         events: [
+            'Szobák elfoglalása',
             'Vendégek érkezése, fogadás',
             'Kikérés',
             'Polgári ceremónia',
@@ -68,19 +71,39 @@ export const i18n = {
             ],
             agendaLink: 'Program'
         },
+        guests: {
+            card1: 'Készíts egy fotót a\nvendégkönyvhöz',
+            card2: 'és küldd el\nnekünk!',
+            help: {
+                gb: 'Vendégkönyv',
+                back: 'vissza',
+                withYours: 'saját telefonnal:',
+                withOurs: 'a mi telefonunkkal:',
+                p11: 'Készíts egy képet,',
+                p12: 'majd küldd el nekünk az elérhetőségeinkre.',
+                p21: 'Nyisd meg a ',
+                p2em: 'kamera alkalmazást',
+                p22: 'és készíts egy képet!',
+                p23: 'Az esküvő után rendszerezzük a mi telefonunkkal készült képeket, tehát nincs további tennivalód.'
+            },
+            dontForget: 'Ne feledkezz meg a szemüvegekről sem!'
+        },
         plural: (noun, count) => noun
     },
     'en': {
+        today: 'Today!',
         menu: {
             countdown: 'Countdown',
             agenda: 'Agenda',
             invitation: 'Invitation',
+            guests: 'Guest Book'
         },
         aug: 'August',
         fullDate: '26th August 2023',
         dowShort: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         events: [
-            'Arrival and reception',
+            'Check in to the rooms',
+            'Arrival & reception',
             'The groom meets the bride',
             'Wedding ceremony (civil)',
             'Wedding ceremony (church)',
@@ -135,7 +158,24 @@ export const i18n = {
                 'Contribute to our new life with',
                 'the tradition we prize!'
             ],
-            agendaLink: 'Agenda'
+            agendaLink: 'Agenda',
+        },
+        guests: {
+            card1: 'Take a photo\nfor the guest book',
+            card2: 'and send it\nto us',
+            help: {
+                gb: 'Guest book using',
+                back: 'back',
+                withYours: 'your phone:',
+                withOurs: 'our phone:',
+                p11: 'Take a photo,',
+                p12: 'then send it to us based on the given options',
+                p21: 'Open the ',
+                p2em: 'camera app',
+                p22: 'and take a photo!',
+                p23: 'These photos will be sorted by us after the wedding, so you are done.'
+            },
+            dontForget: 'Don\'t forget about the party glasses!'
         },
         plural: (noun, count) => count === 1 ? noun : `${noun}s`
     }
