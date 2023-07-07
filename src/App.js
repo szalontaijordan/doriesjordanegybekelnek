@@ -8,6 +8,7 @@ import './App.css';
 import './Menu.scss';
 
 import { I18NContext, useI18N } from './i18n';
+import { Camera, Guests } from './Guests';
 
 const router = [
     {
@@ -33,6 +34,18 @@ const router = [
     {
         path: '/invitation',
         element: <Invitation />,
+    },
+    {
+        path: '/vendegkonyv',
+        element: <Guests />
+    },
+    {
+        path: '/guests',
+        element: <Guests />
+    },
+    {
+        path: '/camera',
+        element: <Camera />
     }
 ];
 
@@ -67,6 +80,9 @@ function Menu() {
         <div className={`menu-overlay ${isOpen ? 'open' : 'closed'}`}>
             <nav>
                 <ul>
+                    <li className={pathname === '/vendegkonyv' ? 'active' : ''}>
+                        <Link to="/vendegkonyv" onClick={close}>Vendégkönyv</Link>
+                    </li>
                     <li className={pathname === '/' ? 'active' : ''}>
                         <Link to="/" onClick={close}>{menu.countdown}</Link>
                     </li>
