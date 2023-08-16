@@ -1,4 +1,6 @@
 import { createContext, useContext } from 'react';
+import { menu18n } from './menu.18n';
+import { faqi18n } from './faq.i18n';
 
 export const I18NContext = createContext({ lang: 'hu', setLang: () => {} });
 
@@ -9,7 +11,9 @@ export const i18n = {
             countdown: 'Visszaszámláló',
             agenda: 'Program',
             invitation: 'Meghívó',
-            guests: 'Vendégkönyv'
+            guests: 'Vendégkönyv',
+            menu: 'Menü',
+            faq: 'Hasznos információk',
         },
         aug: 'Augusztus',
         fullDate: '2023. augusztus 26.',
@@ -88,7 +92,9 @@ export const i18n = {
             },
             dontForget: 'Ne feledkezz meg a szemüvegekről sem!'
         },
-        plural: (noun, count) => noun
+        plural: (noun, count) => noun,
+        ...faqi18n.hu,
+        ...menu18n.hu,
     },
     'en': {
         today: 'Today!',
@@ -96,7 +102,9 @@ export const i18n = {
             countdown: 'Countdown',
             agenda: 'Agenda',
             invitation: 'Invitation',
-            guests: 'Guest Book'
+            guests: 'Guest Book',
+            menu: 'Menu',
+            faq: 'FAQ',
         },
         aug: 'August',
         fullDate: '26th August 2023',
@@ -177,7 +185,9 @@ export const i18n = {
             },
             dontForget: 'Don\'t forget about the party glasses!'
         },
-        plural: (noun, count) => count === 1 ? noun : `${noun}s`
+        plural: (noun, count) => count === 1 ? noun : `${noun}s`,
+        ...faqi18n.en,
+        ...menu18n.en,
     }
 };
 

@@ -97,7 +97,7 @@ function Menu() {
                         <Link to="/vendegkonyv" onClick={close}>{menu.guests}</Link>
                     </li>
                     <li className={pathname === '/menu' ? 'active' : ''}>
-                        <Link to="/menu" onClick={close}>Menü</Link>
+                        <Link to="/menu" onClick={close}>{menu.menu}</Link>
                     </li>
                     <li className={pathname === '/' ? 'active' : ''}>
                         <Link to="/" onClick={close}>{menu.countdown}</Link>
@@ -106,7 +106,7 @@ function Menu() {
                         <Link to="/meghivo" onClick={close}>{menu.invitation}</Link>
                     </li>
                     <li className={pathname === '/faq' ? 'active' : ''}>
-                        <Link to="/faq" onClick={close}>Hasznos információk</Link>
+                        <Link to="/faq" onClick={close}>{menu.faq}</Link>
                     </li>
                 </ul>
             </nav>
