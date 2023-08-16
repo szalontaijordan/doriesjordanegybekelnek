@@ -88,6 +88,20 @@
   border-radius: 50%;
   box-shadow: 0 0 16px 0 rgba(17, 103, 177, 0.5);
   opacity: 1;
+  animation: pulse 2s ease infinite;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1.0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.0);
+  }
 }
 
 .calendar > div:first-child {

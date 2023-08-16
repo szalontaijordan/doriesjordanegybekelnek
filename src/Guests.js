@@ -2,11 +2,11 @@ import dj1 from './img/dj1.png';
 import dj2 from './img/dj2.png';
 import insta from './img/insta-logo.png';
 import mailLogo from './img/mail.png';
-import gpa from './img/gpa.png';
+import gpa from './img/gph.png';
 import sc from './img/samsungcamera.png';
 
 import './Guest.scss';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useI18N } from './i18n';
 
@@ -142,15 +142,25 @@ function DontForget() {
 }
 
 function Photos() {
-    const album = 'https://drive.google.com/drive/folders/1V2oWqES0Pu2ukwSc1-fMHYm6dynLu23-?usp=sharing';
-    return <div className="album">
+    const [url, setURL] = useState('');
+
+    useEffect(() => {
+        async function getData() {
+            const result = await fetch('/api/album');
+            const json = await result.json();
+            setURL(json.albumURL);
+        }
+        getData();
+    }, []);
+
+    return url && <div className="album">
         <img src={gpa} alt="Photos" />
         <span>
             <a
-                href={album}
+                href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-            >Google Drive</a>
+            >Photos</a>
         </span>
     </div>;
 }

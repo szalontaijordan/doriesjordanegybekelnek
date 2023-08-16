@@ -1,7 +1,7 @@
 import { addDays, addHours, addMinutes, addMonths, addSeconds, addWeeks, addYears, differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, differenceInSeconds, differenceInWeeks, differenceInYears } from 'date-fns';
 import { useState, useEffect, useContext } from 'react';
 
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Invitation from './Invitation';
 
 import './App.css';
@@ -9,6 +9,8 @@ import './Menu.scss';
 
 import { I18NContext, useI18N } from './i18n';
 import { Camera, Guests } from './Guests';
+import { FAQ } from './FAQ';
+import { Food } from './Food';
 
 const router = [
     {
@@ -46,6 +48,14 @@ const router = [
     {
         path: '/camera',
         element: <Camera />
+    },
+    {
+        path: '/faq',
+        element: <FAQ />
+    },
+    {
+        path: '/menu',
+        element: <Food />
     }
 ];
 
@@ -80,17 +90,23 @@ function Menu() {
         <div className={`menu-overlay ${isOpen ? 'open' : 'closed'}`}>
             <nav>
                 <ul>
+                    <li className={pathname === '/program' ? 'active' : ''}>
+                        <Link to="/program" onClick={close}>{menu.agenda}</Link>
+                    </li>
                     <li className={pathname === '/vendegkonyv' ? 'active' : ''}>
                         <Link to="/vendegkonyv" onClick={close}>{menu.guests}</Link>
+                    </li>
+                    <li className={pathname === '/menu' ? 'active' : ''}>
+                        <Link to="/menu" onClick={close}>Menü</Link>
                     </li>
                     <li className={pathname === '/' ? 'active' : ''}>
                         <Link to="/" onClick={close}>{menu.countdown}</Link>
                     </li>
-                    <li className={pathname === '/program' ? 'active' : ''}>
-                        <Link to="/program" onClick={close}>{menu.agenda}</Link>
-                    </li>
                     <li className={pathname === '/meghivo' ? 'active' : ''}>
                         <Link to="/meghivo" onClick={close}>{menu.invitation}</Link>
+                    </li>
+                    <li className={pathname === '/faq' ? 'active' : ''}>
+                        <Link to="/faq" onClick={close}>Hasznos információk</Link>
                     </li>
                 </ul>
             </nav>
@@ -115,6 +131,7 @@ const minItemSize = 42;
 
 function Agenda() {
     const { dowShort, events, aug, fullDate } = useI18N();
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -161,11 +178,17 @@ function Agenda() {
     ];
     items.forEach((item, index) => item.text = events[index]);
 
+    const onDayClick = (day) => {
+        if (day === 26) {
+            navigate('/vendegkonyv');
+        }
+    }
+
     return <div className="agenda">
         <div className="calendar">
             <div className="calendar-title"><div className="month">{aug}</div><div className="year">2023</div></div>
             <div className="grid">
-                {days.map((day, key) => <div key={key}>{day}</div>)}
+                {days.map((day, key) => <div key={key} onClick={() => onDayClick(day)}>{day}</div>)}
             </div>
         </div>
         <div className='details'>
