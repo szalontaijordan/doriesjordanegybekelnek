@@ -47,7 +47,7 @@ export const i18n = {
                 'Jordán'
             ],
             bottom1: [
-                '2023. augusztus 26-án 16 órakor a',
+                '2023. augusztus 26-án 15 órakor a',
                 'VERBA TANYÁN',
                 '(4482 Kótaj, Verba tanya 1)',
                 'majd a nyíregyházi református',
@@ -59,7 +59,7 @@ export const i18n = {
                 'Benneteket!'
             ],
             top2: [
-                'Vendégek érkezése: 15:30',
+                'Vendégek érkezése: 15:00',
                 'Polgári ceremónia: 16:30',
                 'Templomi ceremónia: 18:00',
             ],
@@ -134,7 +134,7 @@ export const i18n = {
                 'Jordán'
             ],
             bottom1: [
-                'On the 26th of August, 2023. 16 o\'clock at',
+                'On the 26th of August, 2023. 15 o\'clock at',
                 'VERBA TANYA',
                 '(Hungary, 4482 Kótaj, Verba tanya 1)',
                 'then at the reformed church of Nyíregyháza',
@@ -146,7 +146,7 @@ export const i18n = {
                 'You to our joyous sight!'
             ],
             top2: [
-                'Reception: 15:30',
+                'Reception: 15:00',
                 'Wedding ceremony (civil): 16:30',
                 'Wedding ceremony (church): 18:00',
             ],

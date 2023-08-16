@@ -1,6 +1,10 @@
 export function FAQ() {
     const faq = [
         {
+            q: 'Mi a helyszín címe?',
+            a: '4482 Kótaj, Verba tanya 1',
+        },
+        {
             q: 'Hányra érkezzünk és hova?',
             a: 'Az állófogadás 15.00-kor keződidk a Verba tanyán. Ennek megfelelően érdemes érkezni a helyszínre.',
         },
