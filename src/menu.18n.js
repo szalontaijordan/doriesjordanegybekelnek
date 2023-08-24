@@ -7,6 +7,7 @@ export const menu18n = {
                 menu: 'Vacsora',
                 cake: 'Torta',
                 midnight: 'Éjféli menü',
+                vega: 'Vega/vegán opció'
             },
             rec: [
                 'Aszalt szilvával töltött pulykamell',
@@ -28,6 +29,8 @@ export const menu18n = {
             menu: [
                 'Tyúkhúsleves, főtt hús, zöldségek',
                 '',
+                'Töltött káposzta',
+                '',
                 'Sültes tál',
                 '- Szatmári tölött flekken -',
                 '- Rántott sertéskaraj - ',
@@ -36,6 +39,10 @@ export const menu18n = {
                 '- Rántott karfiol -',
                 '- Rántott sajt - ',
                 '- Francia köret -',
+            ],
+            vega: [
+                'Brokkolikrémleves',
+                'Tofu, grillezett zöldségek,vegyes köret'
             ],
             cake: [
                 '- mák-citrom-fehércsoki -',
@@ -58,6 +65,7 @@ export const menu18n = {
                 menu: 'Diner',
                 cake: 'Cake',
                 midnight: 'Midnight menu',
+                vega: 'Vegetarian/Vegan option'
             },
             rec: [
                 'Turkey Breast Stuffed with Dried Plums',
@@ -76,8 +84,14 @@ export const menu18n = {
                 'Cheese Scone',
                 'Feta and Sun-Dried Tomato Scone',
             ],
+            vega: [
+                'Broccoli Cream Soup',
+                'Tofu, Grilled Vegetables, Steamed rice, Roasted potatoes, Vegetables'
+            ],
             menu: [
                 'Chicken consommé, vegetables',
+                '',
+                'Stuffed Cabbage',
                 '',
                 'Main',
                 '- Stuffed meat à la Szatmár :) -',

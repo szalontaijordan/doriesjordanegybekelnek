@@ -5,7 +5,7 @@ import { useI18N } from './i18n';
 
 export function Food() {
     const { food } = useI18N();
-    const { rec, smol, menu, cake, midnight, titles } = food;
+    const { rec, smol, menu, cake, midnight, titles, vega } = food;
 
     useEffect(() => {
         const onScroll = () => {
@@ -69,6 +69,14 @@ export function Food() {
                 <div className="menuu">
                     <div className="timeline-item" />
                     {midnight.map((item, i) => <div className="timeline-item" key={i}>{item}</div>)}
+                </div>
+                <div className="title">
+                    <strong>{titles.vega}</strong>
+                </div>
+                <div className="menuu">
+                    <div className="timeline-item" />
+                    {vega.map((item, i) => <div className="timeline-item" key={i}>{item}</div>)}
+                    <div className="timeline-item" />
                 </div>
             </div>
         </div>
