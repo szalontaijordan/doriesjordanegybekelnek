@@ -23,6 +23,7 @@ export function Galery() {
         guestsURL: '',
         weddingURL: '',
     });
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         async function getData() {
@@ -30,6 +31,10 @@ export function Galery() {
             const { albumURL: guestsURL } = await result1.json();
             const { albumURL: weddingURL } = await result2.json();
             setURL({ guestsURL, weddingURL });
+
+            if (!result1.ok || !result2.ok) {
+                setError(true);
+            }
         }
         getData();
     }, []);
@@ -40,20 +45,24 @@ export function Galery() {
             <div className="top-text">
                 Dóri &amp; Jordán
             </div>
-            <div className="galery">
-                <a href={url.guestsURL} target="_blank" rel="noopener noreferrer">
+            {(!url.guestsURL || !url.weddingURL) && <div>
+                <div class="lds-dual-ring"></div>
+            </div>}
+            {error && <div>Error</div>}
+            {url.guestsURL && url.weddingURL && <div className="galery">
+                <a href={url.weddingURL} target="_blank" rel="noopener noreferrer">
                     <ImageCard src={wedding} cn="wedding">
                         <Tag text={menu.galery} style={textStyle} />
                         <Photos />
                     </ImageCard>
                 </a>
-                <a href={url.weddingURL} target="_blank" rel="noopener noreferrer">
+                <a href={url.guestsURL} target="_blank" rel="noopener noreferrer">
                     <ImageCard src={dj1} cn="guests">
                         <Tag text={menu.guests} style={{ ...textStyle, padding: '2px 28px 2px 42px' }} />
                         <Photos />
                     </ImageCard>
                 </a>
-            </div>
+            </div>}
         </div>
     </>;
 }
