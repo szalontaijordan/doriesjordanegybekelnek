@@ -99,7 +99,7 @@ export function Camera() {
     </>;
 }
 
-function ImageCard({ src, children, cn }) {
+export function ImageCard({ src, children, cn }) {
     return <div className={`image-card ${cn}`}>
         <img src={src} alt="Bride and Groom" />
         <div className="children">{children}</div>

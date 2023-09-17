@@ -1,61 +1,22 @@
 import { addDays, addHours, addMinutes, addMonths, addSeconds, addWeeks, addYears, differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, differenceInSeconds, differenceInWeeks, differenceInYears } from 'date-fns';
 import { useState, useEffect, useContext } from 'react';
 
-import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import Invitation from './Invitation';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 
 import './App.css';
 import './Menu.scss';
 
 import { I18NContext, useI18N } from './i18n';
-import { Camera, Guests } from './Guests';
-import { FAQ } from './FAQ';
-import { Food } from './Food';
+import { Galery } from './Galery';
 
 const router = [
     {
         path: "/",
+        element: <Galery />,
+    },
+    {
+        path: "/visszaszamlalo",
         element: <CountDown />,
-    },
-    {
-        path: "/countdown",
-        element: <CountDown />,
-    },
-    {
-        path: '/program',
-        element: <Agenda />,
-    },
-    {
-        path: '/agenda',
-        element: <Agenda />,
-    },
-    {
-        path: '/meghivo',
-        element: <Invitation />,
-    },
-    {
-        path: '/invitation',
-        element: <Invitation />,
-    },
-    {
-        path: '/vendegkonyv',
-        element: <Guests />
-    },
-    {
-        path: '/guests',
-        element: <Guests />
-    },
-    {
-        path: '/camera',
-        element: <Camera />
-    },
-    {
-        path: '/faq',
-        element: <FAQ />
-    },
-    {
-        path: '/menu',
-        element: <Food />
     }
 ];
 
@@ -90,23 +51,11 @@ function Menu() {
         <div className={`menu-overlay ${isOpen ? 'open' : 'closed'}`}>
             <nav>
                 <ul>
-                    <li className={pathname === '/program' ? 'active' : ''}>
-                        <Link to="/program" onClick={close}>{menu.agenda}</Link>
-                    </li>
-                    <li className={pathname === '/vendegkonyv' ? 'active' : ''}>
-                        <Link to="/vendegkonyv" onClick={close}>{menu.guests}</Link>
-                    </li>
-                    <li className={pathname === '/menu' ? 'active' : ''}>
-                        <Link to="/menu" onClick={close}>{menu.menu}</Link>
-                    </li>
                     <li className={pathname === '/' ? 'active' : ''}>
-                        <Link to="/" onClick={close}>{menu.countdown}</Link>
+                        <Link to="/" onClick={close}>{menu.galery}</Link>
                     </li>
-                    <li className={pathname === '/meghivo' ? 'active' : ''}>
-                        <Link to="/meghivo" onClick={close}>{menu.invitation}</Link>
-                    </li>
-                    <li className={pathname === '/faq' ? 'active' : ''}>
-                        <Link to="/faq" onClick={close}>{menu.faq}</Link>
+                    <li className={pathname === '/visszaszamlalo' ? 'active' : ''}>
+                        <Link to="/visszaszamlalo" onClick={close}>{menu.countdown}</Link>
                     </li>
                 </ul>
             </nav>
@@ -124,98 +73,6 @@ function LangSelector() {
     return <div className="lang-selector">
         <button className={lang === 'en' ? 'active' : ''} onClick={() => setLang('en')}>🇬🇧</button>
         <button className={lang === 'hu' ? 'active' : ''} onClick={() => setLang('hu')}>🇭🇺</button>
-    </div>;
-}
-
-const minItemSize = 42;
-
-function Agenda() {
-    const { dowShort, events, aug, fullDate } = useI18N();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    useEffect(() => {
-        const onScroll = () => {
-            const items = document.querySelectorAll('.timeline-item');
-            for (let i = 0; i < items.length - 1; i++) {
-                const offsetPx = 50;
-                const diff = items[i + 1].offsetTop - items[i].offsetTop;
-                const maxZero = Math.max(0, diff);
-
-                if (diff <= offsetPx) {
-                    items[i].querySelector('.item-title').style.opacity = maxZero / 100;
-                    items[i].querySelector('.time').style.opacity = maxZero / 100;
-                } else {
-                    items[i].querySelector('.item-title').style.opacity = 1;
-                    items[i].querySelector('.time').style.opacity = 1;
-                }
-            }
-        };
-        window.addEventListener('scroll', onScroll);
-        return () => {
-            window.removeEventListener('scroll', onScroll);
-        };
-    }, []);
-
-    const days = Array.from({ length: 31 }).map((_, i) => i + 1);
-    days.unshift(31);
-    days.push(1, 2, 3);
-    days.unshift(...dowShort);
-
-    const items = [
-        { time: '14:00', text: '', duration: 1 },
-        { time: '15:00', text: '', duration: 0.5 },
-        { time: '15:30', text: '', duration: 2 },
-        { time: '16:30', text: '', duration: 3 },
-        { time: '18:00', text: '', duration: 4 },
-        { time: '20:00', text: '', duration: 8 },
-        { time: '00:00', text: '', duration: 8 },
-        { time: '04:00', text: '', duration: 12 },
-        { time: '10:00', text: '', duration: 2 },
-    ];
-    items.forEach((item, index) => item.text = events[index]);
-
-    const onDayClick = (day) => {
-        if (day === 26) {
-            navigate('/vendegkonyv');
-        }
-    }
-
-    return <div className="agenda">
-        <div className="calendar">
-            <div className="calendar-title"><div className="month">{aug}</div><div className="year">2023</div></div>
-            <div className="grid">
-                {days.map((day, key) => <div key={key} onClick={() => onDayClick(day)}>{day}</div>)}
-            </div>
-        </div>
-        <div className='details'>
-            <div className="space calendar" style={{ position: 'static', visibility: 'hidden' }}>
-                <div className="calendar-title"><div className="month">{aug}</div><div className="year">2023</div></div>
-                <div className="grid">
-                    {days.map((day, key) => <div key={key}>{day}</div>)}
-                </div>
-            </div>
-            <div className="content">
-                <div className="handle" />
-                <div className="title">
-                    <strong>{fullDate}</strong>
-                </div>
-                <div className="timeline">
-                    {items.map((item, key) => (<div className="timeline-item" key={key} style={{ height: `${(item.duration + 1) * minItemSize}px` }}>
-                        <div className="time">
-                            {item.time}
-                        </div>
-                        <div className="dot" />
-                        <div className="item-title">
-                            {item.text}
-                        </div>
-                    </div>))}
-                </div>
-            </div>
-        </div>
     </div>;
 }
 
@@ -264,13 +121,13 @@ function CountDown() {
 
     const { years, months, weeks, days, hours, minutes, seconds } = getData();
     const labels = [
-        { [plural(countDownLabels.years, years)]: years },
-        { [plural(countDownLabels.months, months)]: months },
-        { [plural(countDownLabels.weeks, weeks)]: weeks },
-        { [plural(countDownLabels.days, days)]: days },
-        { [plural(countDownLabels.hours, hours)]: hours },
-        { [plural(countDownLabels.minutes, minutes)]: minutes },
-        { [plural(countDownLabels.seconds, seconds)]: seconds }
+        { [plural(countDownLabels.years, years)]: Math.abs(years) },
+        { [plural(countDownLabels.months, months)]: Math.abs(months) },
+        { [plural(countDownLabels.weeks, weeks)]: Math.abs(weeks) },
+        { [plural(countDownLabels.days, days)]: Math.abs(days) },
+        { [plural(countDownLabels.hours, hours)]: Math.abs(hours) },
+        { [plural(countDownLabels.minutes, minutes)]: Math.abs(minutes) },
+        { [plural(countDownLabels.seconds, seconds)]: Math.abs(seconds) }
     ];
 
     const weddingDayStart = new Date('2023-08-26 7:00').getTime();
